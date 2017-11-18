@@ -1,0 +1,62 @@
+{{ define "main" }}
+<div class="ui vertical segment">
+  <section id="main" class="ui container">
+    <h1 id="title" class="ui header">{{ .Title }}</h1>
+    <div>
+          {{ if .Params.image }}
+          <img class="ui large right floated image" data-src='{{ .Params.image }}'></img>
+          {{ end }}
+
+          <article id="content">
+             {{ .Content }}
+          </article>
+    </div>
+  </section>
+  <div class="ui clearing divider"> </div>
+    <aside id="meta" class="ui container">
+        <div class="ui three column centered grid">
+        <div class="row">
+          <div class="column">
+            <h3 class="ui header">Metadata</h3>
+            <section>
+              {{ if ne .Date.IsZero true }}
+              <p id="date">Published: {{ .Date.Format "Mon Jan 2, 2006" }} </p>
+              {{ end }}
+              <p id="wordcount"> {{ .WordCount }} Words </p>
+            </section>
+          </div>
+          <div class="column">
+            <h3 class="ui header">Topics</h3>
+            {{ with .Params.topics }}
+            <div id="topics" class="ui link list">
+              {{ range . }}
+                 <a class="item" href="{{ "topics" | absURL }}{{ . | urlize }}">{{ . }}</a> 
+              {{ end }}
+            </div>
+            {{ end }}
+          </div>
+          <div class="column">
+            <h3 class="ui header">Tags</h3>
+            {{ with .Params.tags }}
+            <div id="tags" class="ui relaxed link list">
+              {{ range . }}
+                 <a class="item" href="{{ "tags" | absURL }}{{ . | urlize }}">{{ . }}</a> 
+              {{ end }}
+            </div>
+            {{ end }}
+          </div>
+        </div>
+            <div class="row">
+              <div class="class ui two buttons">
+                {{ with .PrevInSection }}
+                <a class="ui secondary basic button" href="{{.Permalink}}"><i class="arrow left icon"></i> {{.Title}}</a>
+                {{ end }}
+                {{ with .NextInSection }}
+                <a class="ui secondary basic button" href="{{.Permalink}}">{{.Title}} <i class="arrow right icon"></i></a>
+                {{ end }}
+              </div>
+            </div>
+        </div>
+    </aside>
+</div>
+{{ end }}
