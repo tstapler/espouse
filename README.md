@@ -1,6 +1,6 @@
 # Espouse, a theme for [Hugo](https://gohugo.io/)
 
-The goal of *Espouse* is to provide a rich base for hosting my peronal website.
+The goal of *Espouse* is to provide a rich base for hosting my personal website.
 
 More to come
 
