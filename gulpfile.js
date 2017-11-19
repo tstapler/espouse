@@ -34,6 +34,7 @@ gulp.task('move', [], function () {
 
   gulp.src(distDir + 'semantic.min.css').pipe(gulp.dest('static/css'))
   gulp.src(distDir + 'semantic.min.js').pipe(gulp.dest('static/js'))
+  gulp.src(distDir + 'themes').pipe(gulp.dest('static/css'))
   gulp.src(node_modules).pipe(gulp.dest('static/js'))
 })
 

@@ -9,10 +9,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "jquery": "^3.2.1",
     "jquery-lazy": "^1.7.6",
     "jquery-parallax.js": "^1.5.0",
     "parallax-js": "^3.1.0",
     "particles.js": "^2.0.0",
+    "photoswipe": "^4.1.2",
     "semantic-ui": "^2.2.13"
   },
   "devDependencies": {

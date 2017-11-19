@@ -11,10 +11,12 @@
   <div class="ui pusher">
     <div id="particles-js">
       <div id="intro-masthead" class="ui inverted vertical masthead center aligned segment">
-        <div id="intro-header" class="ui centered card">
-          <h1>{{ .name }}</h1>
-          <h5>{{ .email }}</h5>
-          <p>{{ .description }}</p>
+        <div class="ui cards">
+          <div id="intro-header" class="ui centered card">
+            <h1>{{ .name }}</h1>
+            <h5>{{ .email }}</h5>
+            <p>{{ .description }}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -52,7 +54,7 @@
   </div>
 </body>
 
-<script src='{{ "js/particles.js" | absURL }}'></script>
+<script src='{{ "js/particles.js" | relURL }}'></script>
 {{ partial "javascript" . }}
 
 </html>

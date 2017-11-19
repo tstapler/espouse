@@ -1,7 +1,9 @@
 {{ define "main" }}
-<div class="ui vertical segment">
   <section id="main" class="ui container">
-    <h1 id="title" class="ui header">{{ .Title }}</h1>
+  <div class="ui inverted vertical header centered segment">
+    <h1>{{ title .Title }}</h1>
+  </div>
+  <div class="ui vertical segment">
     <div>
           {{ if .Params.image }}
           <img class="ui large right floated image" data-src='{{ .Params.image }}'></img>
@@ -30,7 +32,7 @@
             {{ with .Params.topics }}
             <div id="topics" class="ui link list">
               {{ range . }}
-                 <a class="item" href="{{ "topics" | absURL }}{{ . | urlize }}">{{ . }}</a> 
+                 <a class="item" href="{{ "topics" | relURL }}{{ . | urlize }}">{{ . }}</a> 
               {{ end }}
             </div>
             {{ end }}
@@ -40,7 +42,7 @@
             {{ with .Params.tags }}
             <div id="tags" class="ui relaxed link list">
               {{ range . }}
-                 <a class="item" href="{{ "tags" | absURL }}{{ . | urlize }}">{{ . }}</a> 
+                 <a class="item" href="{{ "tags" | relURL }}{{ . | urlize }}">{{ . }}</a> 
               {{ end }}
             </div>
             {{ end }}

@@ -1,6 +1,9 @@
 <html>
 
 {{ partial "html_head" }}
+{{ block "custom_head" . }}
+    <!-- The part of the page that begins to differ between templates -->
+{{ end }}
 
 <body>
   {{ partial "site_sidebar" . }}
@@ -17,5 +20,8 @@
   {{ end }}
 </body>
 {{ partial "javascript" . }}
+{{ block "custom_javascript" . }}
+    <!-- The part of the page that begins to differ between templates -->
+{{ end }}
 
 </html>

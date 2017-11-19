@@ -1,7 +1,4 @@
 {{ define "main" }}
-<!-- this <div> includes the title summary -->
-<div>
-</div>
 <div class="ui inverted vertical header centered segment">
   <h1>{{ title .Title }}</h1>
 </div>
@@ -17,7 +14,7 @@
         <h2 class="header"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
       </div>
       {{ if .Params.image }}
-      <div class="image"><img data-src="{{ .Params.image | absURL }}" ></div>
+      <div class="image"><img data-src="{{ .Params.image | relURL }}" ></div>
       {{ end }}
       <div class="content">
         {{ .Summary }}
