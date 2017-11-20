@@ -24,7 +24,6 @@ gulp.task('sass:watch', function () {
 })
 
 var node_modules = [
-'node_modules/jquery-parallax.js/parallax.min.js',
 'node_modules/particles.js/particles.js',
 'node_modules/jquery-lazy/jquery.lazy.min.js'
 ]
