@@ -1,12 +1,19 @@
 const webpack = require('webpack')
 const path = require('path')
 
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const CompressionPlugin = require("compression-webpack-plugin")
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const ManifestPlugin = require('webpack-manifest-plugin')
+const MinifyPlugin = require("babel-minify-webpack-plugin")
+const OfflinePlugin = require('offline-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 const cssExtractTextPlugin = new ExtractTextPlugin({
   filename: (getPath) => {
     return getPath('css/[name].css').replace('css/js', 'css')
-  }
+  },
+  allChunks: true
 })
 
 const config = {
@@ -24,7 +31,7 @@ const config = {
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
-      '../../theme.config$': path.join(__dirname, './semantic/src/theme.config')
+      '../../theme.config$': path.join(__dirname, './semantic/src/theme.config'),
     }
   },
   module: {
@@ -32,30 +39,22 @@ const config = {
       test: /\.scss$/,
       use: cssExtractTextPlugin.extract({
         use: [{
-          loader: 'css-loader'
+          loader: 'css-loader',
         }, {
           loader: 'sass-loader'
         }, {
           loader: 'resolve-url-loader'
         }],
-          // use style-loader in development
-        fallback: 'style-loader'
       })
     },
     {// this handles .less translation
       use: cssExtractTextPlugin.extract({
         use: [{
           loader: 'css-loader',
-          options: {
-            sourceMap: true
-          }
         }, {
-          loader: 'less-loader',
-          options: {
-            sourceMap: true
-          }
+          loader: 'less-loader'
         }],
-        publicPath: './'
+        publicPath: ''
       }),
       test: /\.less$/
     },
@@ -63,8 +62,12 @@ const config = {
       test: /\.css$/,
       use: cssExtractTextPlugin.extract({
         fallback: 'style-loader',
-        use: ['css-loader', 'resolve-url-loader'],
-        publicPath: './'
+        use: [{
+          loader: 'css-loader', 
+          options: {
+          minimize: true
+        }}, 'resolve-url-loader'],
+        publicPath: ''
       })
     },
     {
@@ -85,7 +88,38 @@ const config = {
       'window.$': 'jquery'
     }),
     // this handles the bundled .css output file
-    cssExtractTextPlugin
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      minimize: true,
+      mangle: true,
+      compress: {
+        warnings: false, // Suppress uglification warnings
+        pure_getters: true,
+        unsafe: true,
+        unsafe_comps: true,
+        screw_ie8: true,
+        conditionals: true,
+        unused: true,
+        comparisons: true,
+        sequences: true,
+        dead_code: true,
+        evaluate: true,
+        if_return: true,
+        join_vars: true
+      },
+      output: {
+        comments: false,
+      },
+    }),
+    new MinifyPlugin(),
+    cssExtractTextPlugin,
+    new OptimizeCssAssetsPlugin({
+      cssProcessor: require('cssnano'),
+      cssProcessorOptions: { discardComments: { removeAll: true } },
+      canPrint: true
+    }),
+    new ManifestPlugin(),
+    new OfflinePlugin(),
   ]
 }
 

@@ -1,7 +1,7 @@
 <figure itemprop="associatedMedia" itemscope
 itemtype="https://schema.org/ImageObject">
-  <a href="{{ .Get "href" | relURL }}" itemprop="contentUrl" data-size="{{ .Get "largeDim" | relURL }}" data-medium-url="{{ .Get "smallUrl"  | relURL }}" data-medium-size="{{ .Get "smallDim"  | relURL }}">
-    <img alt="{{ .Get "alt" | relURL }}" data-size="{{ .Get "thumbSize" | relURL }}" itemprop="thumbnail" src="{{ .Get "thumbUrl" | relURL }}">
+  <a href="{{ .Get "href" | relURL }}" itemprop="contentUrl" data-size="{{ .Get "largeDim" }}" data-medium-url="{{ .Get "smallUrl"  | relURL }}" data-medium-size="{{ .Get "smallDim"  | relURL }}">
+    <img alt="{{ .Get "alt" }}" data-size="{{ .Get "thumbSize" }}" itemprop="thumbnail" src="{{ .Get "thumbUrl" | relURL }}">
   </a>
   <figcaption itemprop="caption description">
     {{ .Get "caption"}}

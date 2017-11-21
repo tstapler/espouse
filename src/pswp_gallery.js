@@ -1,3 +1,6 @@
+import PhotoSwipe from 'photoswipe/dist/photoswipe.min.js'
+import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default.min.js'
+
 var initPhotoSwipeFromDOM = function(gallerySelector) {
 
     // parse slide data (url, title, size ...) from DOM elements
@@ -25,7 +28,7 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
 		    continue;
 
             size = linkEl.getAttribute('data-size').split('x');
-	    mediumSize = linkEl.getAttribute('data-medium-size').split('x');
+	    var mediumSize = linkEl.getAttribute('data-medium-size').split('x');
 
             // create slide object
             item = {
@@ -274,5 +277,4 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
     }
 };
 
-// execute above function
-initPhotoSwipeFromDOM('.gallery');
+export {initPhotoSwipeFromDOM as default}

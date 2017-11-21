@@ -1,0 +1,15 @@
+{
+  "all.css": "css/all.css",
+  "all.js": "js/all.bundle.js",
+  "default-skin.png": "default-skin.png?e3f799c6dec9af194c86decdf7392405",
+  "default-skin.svg": "default-skin.svg?b257fa9c5ac8c515ac4d77a667ce2943",
+  "homePage.js": "js/homePage.bundle.js",
+  "icons.eot": "icons.eot?674f50d287a8c48dc19ba404d20fe713",
+  "icons.svg": "icons.svg?912ec66d7572ff821749319396470bde",
+  "icons.ttf": "icons.ttf?b06871f281fee6b241d60582ae9369b9",
+  "icons.woff": "icons.woff",
+  "icons.woff2": "icons.woff2",
+  "photoGallery.css": "css/photoGallery.css",
+  "photoGallery.js": "js/photoGallery.bundle.js",
+  "preloader.gif": "preloader.gif?e34aafbb485a96eaf2a789b2bf3af6fe"
+}

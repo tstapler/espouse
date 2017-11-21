@@ -1,8 +1,5 @@
 {{ define "custom_head" }}
-<link rel="stylesheet" type="text/css" href='{{ "css/photoswipe.css" | relURL }}'/>
-    <link rel="stylesheet" type="text/css" href='{{ "css/default-skin/default-skin.css" | relURL }}'/>
-    <script type="application/javascript" src='{{ "js/photoswipe.min.js" | relURL}}'></script>
-    <script type="application/javascript" src='{{ "js/photoswipe-ui-default.min.js" | relURL }}'></script>
+<link rel="stylesheet" type="text/css" href='{{ "css/photoGallery.css" | relURL }}'/>
 {{end}}
 
 {{ define "main" }}
@@ -11,7 +8,7 @@
   <h1>{{ title .Title }}</h1>
 </div>
 <div class="ui vertical segment">
-  <div class="gallery" itemscope itemtype="https://schema.org/ImageGallery">
+  <div id="gallery" itemscope itemtype="https://schema.org/ImageGallery">
     <div class="ui centered cards">
       {{ .Content }}
     </div>
@@ -56,5 +53,5 @@
 {{ end }}
 
 {{define "custom_javascript" }}
-<script type="application/javascript" src='{{ "js/pswp_gallery.js" | relURL }}'></script>
+<script type="application/javascript" src='{{ "js/photoGallery.bundle.js" | relURL }}'></script>
 {{ end }}
