@@ -13,6 +13,7 @@ const cssExtractTextPlugin = new ExtractTextPlugin({
   filename: (getPath) => {
     return getPath('css/[name].css').replace('css/js', 'css')
   },
+  publicPath: '/',
   allChunks: true
 })
 
@@ -54,7 +55,6 @@ const config = {
         }, {
           loader: 'less-loader'
         }],
-        publicPath: ''
       }),
       test: /\.less$/
     },
@@ -66,19 +66,29 @@ const config = {
           loader: 'css-loader', 
           options: {
           minimize: true
-        }}, 'resolve-url-loader'],
-        publicPath: ''
+          },
+        }],
       })
     },
     {
       test: /\.jpe?g$|\.gif$|\.png$|\.ttf$|\.eot$|\.svg$/,
-      use: 'file-loader?name=[name].[ext]?[hash]'
+      use: [{
+        loader: 'file-loader?name=[name].[ext]?[hash]',
+        options: {
+          publicPath: "/"
+        }
+      }]
     },
     {
       test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-      loader: 'url-loader?limit=10000&mimetype=application/fontwoff&name=[name].[ext]'
-    },
-    ]
+      use: [{
+
+        loader: 'url-loader?limit=10000&mimetype=application/fontwoff&name=[name].[ext]',
+        options: {
+          publicPath: "/"
+        }
+      }],
+    }]
   },
   plugins: [
     new webpack.ProvidePlugin({
@@ -119,7 +129,10 @@ const config = {
       canPrint: true
     }),
     new ManifestPlugin(),
-    new OfflinePlugin(),
+    new OfflinePlugin({
+      publicPath: '/',
+      relativePaths: true,
+    }),
   ]
 }
 
