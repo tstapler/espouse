@@ -1,14 +1,14 @@
 const webpack = require('webpack')
 const path = require('path')
 
+var rollupCommonjsPlugin = require('rollup-plugin-commonjs')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const CompressionPlugin = require("compression-webpack-plugin")
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const MinifyPlugin = require("babel-minify-webpack-plugin")
-const OfflinePlugin = require('offline-plugin');
+const OfflinePlugin = require('offline-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-
 const cssExtractTextPlugin = new ExtractTextPlugin({
   filename: (getPath) => {
     return getPath('css/[name].css').replace('css/js', 'css')
@@ -37,6 +37,25 @@ const config = {
   },
   module: {
     rules: [{
+        test: /app.js$/,
+        use: [{
+          loader: 'webpack-rollup-loader',
+          options: {
+            plugins: [rollupCommonjsPlugin()],
+            external: ['jquery', 'jquery-lazy']
+          },
+        }]
+      },{
+        test: /homePage.js$/,
+        use: [{
+          loader: 'webpack-rollup-loader',
+          options: {
+            plugins: [rollupCommonjsPlugin()],
+            external: ['particles.js']
+          },
+        }]
+      },
+    {
       test: /\.scss$/,
       use: cssExtractTextPlugin.extract({
         use: [{
@@ -99,6 +118,7 @@ const config = {
     }),
     // this handles the bundled .css output file
     new webpack.optimize.OccurrenceOrderPlugin(),
+    new MinifyPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
       mangle: true,
@@ -121,7 +141,6 @@ const config = {
         comments: false,
       },
     }),
-    new MinifyPlugin(),
     cssExtractTextPlugin,
     new OptimizeCssAssetsPlugin({
       cssProcessor: require('cssnano'),
@@ -133,6 +152,7 @@ const config = {
       publicPath: '/',
       relativePaths: true,
     }),
+    // new BundleAnalyzerPlugin(),
   ]
 }
 
