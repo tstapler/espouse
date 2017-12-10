@@ -6,6 +6,9 @@
             <p>
               Powered by <a href="http://gohugo.io">Hugo</a>
             </p>
+            {{ if .Site.Params.github_url }}
+            <p>Check out this site's source code on <a href="{{ .Site.Params.github_url }}">Github</a></p>
+            {{ end }}
           </div>
 
           <div class="four wide column">
