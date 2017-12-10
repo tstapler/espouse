@@ -1,6 +1,17 @@
 <html>
 
 {{ partial "html_head" }}
+{{ if .Site.Params.gaTag }}
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.gaTag }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+gtag('config', '{{ .Site.Params.gaTag }}');
+</script>
+{{ end }}
 {{ block "custom_head" . }}
     <!-- The part of the page that begins to differ between templates -->
 {{ end }}

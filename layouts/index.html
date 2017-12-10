@@ -1,7 +1,18 @@
 <!DOCTYPE html>
 <html>
 
-{{ partial "html_head" }}
+{{ partial "html_head" . }}
+{{ if .Site.Params.gatag }}
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.gatag }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+gtag('config', '{{ .Site.Params.gatag }}');
+</script>
+{{end}}
 
 <body>
   {{ partial "site_sidebar" . }}
