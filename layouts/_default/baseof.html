@@ -1,6 +1,6 @@
 <html>
 
-{{ partial "html_head" }}
+{{ partial "html_head" . }}
 {{ if .Site.Params.gaTag }}
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.gaTag }}"></script>
@@ -30,6 +30,8 @@ gtag('config', '{{ .Site.Params.gaTag }}');
     {{ partial "footer" . }} 
   {{ end }}
 </body>
+{{ block "custom_pre_javascript" . }}
+{{ end }}
 {{ partial "javascript" . }}
 {{ block "custom_javascript" . }}
     <!-- The part of the page that begins to differ between templates -->
