@@ -36,25 +36,7 @@ const config = {
     }
   },
   module: {
-    rules: [{
-        test: /app.js$/,
-        use: [{
-          loader: 'webpack-rollup-loader',
-          options: {
-            plugins: [rollupCommonjsPlugin()],
-            external: ['jquery', 'jquery-lazy']
-          },
-        }]
-      },{
-        test: /homePage.js$/,
-        use: [{
-          loader: 'webpack-rollup-loader',
-          options: {
-            plugins: [rollupCommonjsPlugin()],
-            external: ['particles.js']
-          },
-        }]
-      },
+    rules: [
     {
       test: /\.scss$/,
       use: cssExtractTextPlugin.extract({
@@ -110,6 +92,7 @@ const config = {
     }]
   },
   plugins: [
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.ProvidePlugin({
       $: 'jquery',
       'jQuery': 'jquery',
@@ -147,7 +130,6 @@ const config = {
       cssProcessorOptions: { discardComments: { removeAll: true } },
       canPrint: true
     }),
-    new ManifestPlugin(),
     new OfflinePlugin({
       publicPath: '/',
       relativePaths: true,

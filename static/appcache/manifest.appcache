@@ -1,5 +1,5 @@
 CACHE MANIFEST
-#ver:12/7/2017, 4:25:03 PM
+#ver:5/26/2018, 1:58:45 PM
 #plugin:4.8.4
 
 CACHE:
@@ -9,11 +9,11 @@ CACHE:
 ../674f50d287a8c48dc19ba404d20fe713.eot
 ../b06871f281fee6b241d60582ae9369b9.ttf
 ../912ec66d7572ff821749319396470bde.svg
-../js/photoGallery.bundle.js
 ../js/all.bundle.js
+../js/photoGallery.bundle.js
 ../js/homePage.bundle.js
+../css/all.css
 ../css/photoGallery.css
-../manifest.json
 
 NETWORK:
 *
