@@ -1,29 +1,20 @@
 const webpack = require('webpack')
 const path = require('path')
 
-var rollupCommonjsPlugin = require('rollup-plugin-commonjs')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const CompressionPlugin = require("compression-webpack-plugin")
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
-const MinifyPlugin = require("babel-minify-webpack-plugin")
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OfflinePlugin = require('offline-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const cssExtractTextPlugin = new ExtractTextPlugin({
-  filename: (getPath) => {
-    return getPath('css/[name].css').replace('css/js', 'css')
-  },
-  publicPath: '/',
-  allChunks: true
-})
 
 const config = {
+  mode: 'production',
   target: 'web',
   context: path.resolve(__dirname),
   entry: {
     all: './app.js',
     homePage: './src/homePage.js',
-    photoGallery: './src/gallery.js'
   },
   output: {
     path: path.resolve(__dirname, 'static'),
@@ -38,38 +29,22 @@ const config = {
   module: {
     rules: [
     {
-      test: /\.scss$/,
-      use: cssExtractTextPlugin.extract({
-        use: [{
-          loader: 'css-loader',
-        }, {
-          loader: 'sass-loader'
-        }, {
-          loader: 'resolve-url-loader'
-        }],
-      })
-    },
-    {// this handles .less translation
-      use: cssExtractTextPlugin.extract({
-        use: [{
-          loader: 'css-loader',
-        }, {
-          loader: 'less-loader'
-        }],
-      }),
-      test: /\.less$/
+      test: /\.js$/,
+      exclude: /(node_modules|bower_components)/,
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: ['env']
+        }
+      }
     },
     {
-      test: /\.css$/,
-      use: cssExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: [{
-          loader: 'css-loader', 
-          options: {
-          minimize: true
-          },
-        }],
-      })
+      test: /\.scss$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader', 'resolve-url-loader' ],
+    },
+    {
+      test: /\.css$/i,
+      use: [MiniCssExtractPlugin.loader, 'css-loader'],
     },
     {
       test: /\.jpe?g$|\.gif$|\.png$|\.ttf$|\.eot$|\.svg$/,
@@ -92,49 +67,27 @@ const config = {
     }]
   },
   plugins: [
-    new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.ProvidePlugin({
       $: 'jquery',
       'jQuery': 'jquery',
       'window.jQuery': 'jquery',
       'window.$': 'jquery'
     }),
-    // this handles the bundled .css output file
+    // // this handles the bundled .css output file
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new MinifyPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      minimize: true,
-      mangle: true,
-      compress: {
-        warnings: false, // Suppress uglification warnings
-        pure_getters: true,
-        unsafe: true,
-        unsafe_comps: true,
-        screw_ie8: true,
-        conditionals: true,
-        unused: true,
-        comparisons: true,
-        sequences: true,
-        dead_code: true,
-        evaluate: true,
-        if_return: true,
-        join_vars: true
-      },
-      output: {
-        comments: false,
-      },
-    }),
-    cssExtractTextPlugin,
+    new MiniCssExtractPlugin(),
     new OptimizeCssAssetsPlugin({
       cssProcessor: require('cssnano'),
       cssProcessorOptions: { discardComments: { removeAll: true } },
       canPrint: true
     }),
+    new CompressionPlugin(),
+    new ManifestPlugin(),
     new OfflinePlugin({
       publicPath: '/',
       relativePaths: true,
     }),
-    // new BundleAnalyzerPlugin(),
+    new BundleAnalyzerPlugin(),
   ]
 }
 

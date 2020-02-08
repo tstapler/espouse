@@ -89,5 +89,7 @@ var particleJSConfig = {
         },
     "retina_detect": true,
 };
+
+
 if(typeof particlesJS !== 'undefined')
 particlesJS(particleJSConfig);

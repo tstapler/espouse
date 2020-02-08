@@ -1,19 +1,16 @@
 CACHE MANIFEST
-#ver:5/26/2018, 1:58:45 PM
-#plugin:4.8.4
+#ver:2020-2-7 10:27:43 PM
+#plugin:4.9.1
 
 CACHE:
-../e3f799c6dec9af194c86decdf7392405.png
-../b257fa9c5ac8c515ac4d77a667ce2943.svg
-../e34aafbb485a96eaf2a789b2bf3af6fe.gif
 ../674f50d287a8c48dc19ba404d20fe713.eot
+../9c74e172f87984c48ddf5c8108cabe67.png
 ../b06871f281fee6b241d60582ae9369b9.ttf
-../912ec66d7572ff821749319396470bde.svg
+../acf3dcb7ff752b5296ca23ba2c7c2606.svg
 ../js/all.bundle.js
-../js/photoGallery.bundle.js
 ../js/homePage.bundle.js
 ../css/all.css
-../css/photoGallery.css
+../manifest.json
 
 NETWORK:
 *

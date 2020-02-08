@@ -4,29 +4,31 @@
 </div>
 
 <div class="ui vertical stripe segment">
-  <div class="ui three stackable cards">
-    {{ range .Data.Pages }}
-    <div class="ui centered raised card">
-      <div class="content">
-        {{ if .Params.github }}
-        <a class="right floated ui image" href="{{ .Params.github }}"><i class="large github icon"></i></a>
+  <div class="ui padded container">
+    <div class="ui three stackable centered cards">
+      {{ range .Data.Pages }}
+      <div class="ui centered raised card">
+        <div class="content">
+          {{ if .Params.github }}
+          <a class="right floated ui image" href="{{ .Params.github }}"><i class="large github icon"></i></a>
+          {{ end }}
+          <h2 class="header"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        </div>
+        {{ if .Params.image }}
+        <div class="image"><img data-src="{{ .Params.image | relURL }}" ></div>
         {{ end }}
-        <h2 class="header"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-      </div>
-      {{ if .Params.image }}
-      <div class="image"><img data-src="{{ .Params.image | relURL }}" ></div>
-      {{ end }}
-      <div class="content">
-        {{ .Summary }}
-      </div>
-      {{ if .Truncated }}
-      <!-- This <div> includes a read more link, but only if the summary is truncated... -->
-      <div class="center aligned content">
-        <a class="ui large button" href="{{ .RelPermalink }}">Read More…</a>
+        <div class="content">
+          {{ .Summary }}
+        </div>
+        {{ if .Truncated }}
+        <!-- This <div> includes a read more link, but only if the summary is truncated... -->
+        <div class="center aligned content">
+          <a class="ui large button" href="{{ .RelPermalink }}">Read More…</a>
+        </div>
+        {{ end }}
       </div>
       {{ end }}
     </div>
-    {{ end }}
   </div>
 </div>
 {{ end }}

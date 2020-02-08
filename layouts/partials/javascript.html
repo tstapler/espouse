@@ -1,2 +1,11 @@
-  <script src='{{ "js/all.bundle.js" | relURL }}'></script>
-
+<script src='{{ "js/all.bundle.js" | relURL }}'></script>
+<!-- <script src="{{"mermaid/mermaid.js" | relURL}}{{ if not .Site.Params.disableAssetsBusting }}?{{ now.Unix }}{{ end }}"></script> -->
+<!-- <script> -->
+<!--     mermaid.initialize({ startOnLoad: true }); -->
+<!--     JQuery(document).ready(function() { -->
+<!--       $('code.language-mermaid').each(function(index, element) { -->
+<!--         var content = $(element).html().replace(/&amp;/g, '&'); -->
+<!--         $(element).parent().replaceWith('<div class="mermaid" align="center">' + content + '</div>'); -->
+<!--       }); -->
+<!--     }); -->
+<!-- </script> -->

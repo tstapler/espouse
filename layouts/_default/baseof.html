@@ -17,10 +17,10 @@ gtag('config', '{{ .Site.Params.gaTag }}');
 {{ end }}
 
 <body>
+  <div class="ui pusher">
   {{ partial "site_sidebar" . }}
   {{ partial "site_nav" . }}
   <!-- Code that all your templates share, like a header -->
-  <div class="ui pusher">
     {{ block "main" . }}
     <!-- The part of the page that begins to differ between templates -->
     {{ end }} 

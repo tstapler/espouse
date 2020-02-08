@@ -1,22 +1,33 @@
 {{ define "main" }}
-  <section id="main" class="ui container">
-  <div class="ui inverted vertical header centered segment">
-    <h1>{{ title .Title }}</h1>
-  </div>
-  <div class="ui vertical segment">
-    <div>
-          {{ if .Params.image }}
-          <img class="ui large right floated image" data-src='{{ .Params.image }}'></img>
-          {{ end }}
-
-          <article id="content">
-             {{ .Content }}
-          </article>
+<div class="ui inverted vertical header centered segment">
+  <h1>{{ title .Title }}</h1>
+  <div class="ui main container">
+      <div class="ui two buttons">
+        {{ with .PrevInSection }}
+        <a class="ui inverted basic button" href="{{.Permalink}}"><i class="arrow left icon"></i> {{.Title}}</a>
+        {{ end }}
+        {{ with .NextInSection }}
+        <a class="ui inverted basic button" href="{{.Permalink}}">{{.Title}} <i class="arrow right icon"></i></a>
+        {{ end }}
+      </div>
     </div>
-  </section>
-  <div class="ui clearing divider"> </div>
+  </div>
+</div>
+<div class="ui padded grid segment">
+  <div class="sixteen wide column">
+    <section id="main" class="ui container">
+      <div class="ui large centered header">
+        {{ if .Params.image }}
+        <img class="ui large right floated image" data-src='{{ .Params.image }}'></img>
+        {{ end }}
+      </div>
+      <article id="content" class="ui text container">
+        {{ .Content }}
+      </article>
+    </section>
+    <div class="ui clearing divider"> </div>
     <aside id="meta" class="ui container">
-        <div class="ui three column centered grid">
+      <div class="ui three column grid">
         <div class="row">
           <div class="column">
             <h3 class="ui header">Metadata</h3>
@@ -32,7 +43,7 @@
             {{ with .Params.topics }}
             <div id="topics" class="ui link list">
               {{ range . }}
-                 <a class="item" href="{{ "topics" | relURL }}{{ . | urlize }}">{{ . }}</a> 
+              <a class="item" href="{{ "topics" | relURL }}/{{ . | urlize }}">{{ . }}</a> 
               {{ end }}
             </div>
             {{ end }}
@@ -42,23 +53,14 @@
             {{ with .Params.tags }}
             <div id="tags" class="ui relaxed link list">
               {{ range . }}
-                 <a class="item" href="{{ "tags" | relURL }}{{ . | urlize }}">{{ . }}</a> 
+              <a class="item" href="{{ "tags" | relURL }}/{{ . | urlize }}">{{ . }}</a> 
               {{ end }}
             </div>
             {{ end }}
           </div>
         </div>
-            <div class="row">
-              <div class="class ui two buttons">
-                {{ with .PrevInSection }}
-                <a class="ui secondary basic button" href="{{.Permalink}}"><i class="arrow left icon"></i> {{.Title}}</a>
-                {{ end }}
-                {{ with .NextInSection }}
-                <a class="ui secondary basic button" href="{{.Permalink}}">{{.Title}} <i class="arrow right icon"></i></a>
-                {{ end }}
-              </div>
-            </div>
-        </div>
+      </div>
     </aside>
+  </div>
 </div>
 {{ end }}
