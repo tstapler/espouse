@@ -1,4 +1,5 @@
 import 'jquery'
+import 'jquery-lazy'
 import 'semantic-ui-forest-themes/semantic.spacelab.min.css'
 import 'semantic-ui-forest-themes/semantic.js'
 import './src/espouse.js'
