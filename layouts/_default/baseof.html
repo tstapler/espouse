@@ -16,6 +16,7 @@ gtag('config', '{{ .Site.Params.gaTag }}');
     <!-- The part of the page that begins to differ between templates -->
 {{ end }}
 
+{{ partial "meta" . }}
 <body>
   <div class="ui pusher">
   {{ partial "site_sidebar" . }}

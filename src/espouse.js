@@ -90,6 +90,33 @@ var particleJSConfig = {
     "retina_detect": true,
 };
 
+function uuid() {
+var result='';
+for(var i=0; i<32; i++)
+result += Math.floor(Math.random()*16).toString(16).toUpperCase
+();
+return result
+}
+
+// Lightbox for photos using Semantic UI
+// Should work for the image shortcode
+$('.post-image').click(function() {
+  var image = $(this)
+    .children('img')
+    .attr('src')
+  var id = uuid()
+  $('body').append(
+    `<div id=${id} class="ui modal">
+        <img class="ui centered image" src="${image}"/>
+    </div>`
+  )
+
+  $(`#${id}`).modal({
+    onHidden: () => $(`#${id}`).remove()
+  })
+
+  $(`#${id}`).modal('show')
+})
 
 if(typeof particlesJS !== 'undefined')
 particlesJS(particleJSConfig);

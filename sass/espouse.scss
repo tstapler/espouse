@@ -10,7 +10,6 @@ svg {
 	height: auto;
 	margin-left: auto;
 	margin-right: auto;
-	
 }
 
 #intro-header {
@@ -51,4 +50,9 @@ z-index: 0;
 .ui.main.menu {
 	margin-top:0;
 	margin-bottom:0;
+}
+
+// Enable scroll bars on code blocks
+pre, .highlight pre {
+   overflow: scroll;
 }

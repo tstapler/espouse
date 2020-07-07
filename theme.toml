@@ -11,8 +11,8 @@ features = ["", ""]
 min_version = 0.17
 
 [author]
-  name = ""
-  homepage = ""
+  name = "Tyler Stapler"
+  homepage = "https://tyler.staplerstation.com"
 
 # If porting an existing theme
 [original]

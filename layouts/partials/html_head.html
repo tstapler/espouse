@@ -1,9 +1,12 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" charset="utf-8" />
-  <title>{{ .Site.Title }}</title>
   {{"<!-- head:html -->" | safeHTML}}
   {{"<!-- endinject -->" | safeHTML}}
+  {{ $style := resources.Get "/all.css" }}
 
-  <link rel="manifest" href="/manifest.json">
-  <link rel="stylesheet" type="text/css" href='{{ "css/all.css" | relURL }}'>
+  {{- if (eq (getenv "HUGO_ENV") "production") -}}
+    {{- $style = $style | postCSS | minify | fingerprint "md5" -}}
+  {{- end -}}
+
+  <link rel="stylesheet" href="{{ $style | relURL}}">
 </head>
