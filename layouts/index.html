@@ -25,7 +25,7 @@
       {{ range .Site.Params.technologies }}
       <div class="card">
         <div class="image">
-          <img class="mini ui image" data-src="{{ .icon_url }}" alt="{{.name}} Icon">
+          <img class="mini ui image" loading="lazy" src="{{ .icon_url }}" alt="{{.name}} Icon">
         </div>
         <div class="center aligned content">
           <div class="header">
@@ -43,6 +43,9 @@
   </div>
 {{ end }}
 {{ define "custom_pre_javascript" }}
-<script src='{{ "js/homePage.bundle.js" | relURL }}'></script>
+{{ range (resources.Match "js/homePage.bundle.js") }}
+{{ $bundle := . | resources.Minify | resources.Fingerprint "sha512"}}
+<script defer crossorigin="anonymous" src='{{ $bundle.RelPermalink }}' integrity='{{ $bundle.Data.Integrity }}'></script>
+{{end}}
 {{ end }}
 

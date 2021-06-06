@@ -2,10 +2,11 @@
 <div class="ui inverted vertical header centered segment">
   <h1>{{ title .Title }}</h1>
 </div>
+<div class="ui hidden divider"></div>
 
 <div class="ui vertical stripe segment">
   <div class="ui padded container">
-    <div class="ui three stackable centered cards">
+    <div class="ui stackable centered cards">
       {{ range .Data.Pages }}
       <div class="ui centered raised card">
         <div class="content">
@@ -15,7 +16,7 @@
           <h2 class="header"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
         </div>
         {{ if .Params.image }}
-        <div class="image"><img data-src="{{ .Params.image | relURL }}" ></div>
+        <div class="image"><img loading="lazy" src="{{ .Params.image | relURL }}" ></div>
         {{ end }}
         <div class="content">
           {{ .Summary }}

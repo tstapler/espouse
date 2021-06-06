@@ -6,3 +6,6 @@ deps:
 
 watch:
 	yarn run watch
+
+clean:
+	rm -rf static

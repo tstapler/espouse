@@ -1,5 +1,8 @@
 body, html {
   height: 100%;
+  /* Suggestions from practical typography */
+  line-height: 1.45;
+  font-size: 1rem;
 }
 
 nav {
@@ -55,4 +58,23 @@ z-index: 0;
 // Enable scroll bars on code blocks
 pre, .highlight pre {
    overflow: scroll;
+}
+
+// Fix for floated figures
+// https://stackoverflow.com/questions/54782294/how-to-use-floated-style-in-figure-tags-when-using-semantic-ui
+[class*="post-image left floated"] {
+	float: left;
+	margin-left: 0.25em;
+}
+
+[class*="post-image right floated"] {
+	float: right;
+	margin-right: 0.25em;
+}
+
+figcaption[class*="centered"] {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: block;
 }

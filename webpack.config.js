@@ -1,11 +1,10 @@
 const webpack = require('webpack')
 const path = require('path')
 
-const CompressionPlugin = require("compression-webpack-plugin")
-const ManifestPlugin = require('webpack-manifest-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const OfflinePlugin = require('offline-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const MinifyPlugin = require("babel-minify-webpack-plugin");
 
 const config = {
   mode: 'production',
@@ -13,11 +12,12 @@ const config = {
   context: path.resolve(__dirname),
   entry: {
     all: './app.js',
+    semanticExtras: './src/semanticExtras.js',
     homePage: './src/homePage.js',
   },
   output: {
     path: path.resolve(__dirname, 'static'),
-    filename: 'js/[name].bundle.js'
+    filename: 'js/[name].bundle.js',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -28,12 +28,12 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.m?js$/,
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env']
+            presets: ['@babel/preset-env']
           }
         }
       },
@@ -55,6 +55,22 @@ const config = {
         }]
       },
       {
+        test: /\.svg$/,
+        use: [
+          {loader: 'file-loader'},
+          {
+            loader: 'svgo-loader',
+            options: {
+              plugins: [
+                {removeTitle: true},
+                {convertColors: {shorthex: false}},
+                {convertPathData: false}
+              ]
+            }
+          }
+        ]
+      },
+      {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         use: [{
 
@@ -74,19 +90,20 @@ const config = {
     }),
     // // this handles the bundled .css output file
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      esModule: true,
+      filename: '[name].css',
+      chunkFilename: '[name].[id].css',
+    }),
     new OptimizeCssAssetsPlugin({
       cssProcessor: require('cssnano'),
       cssProcessorOptions: {discardComments: {removeAll: true}},
       canPrint: true
     }),
-    new CompressionPlugin(),
-    new ManifestPlugin(),
-    new OfflinePlugin({
-      publicPath: '/',
-      relativePaths: true
-    })
-  ]
+  ],
+  optimization: {
+    minimize: true,
+  },
 }
 
 module.exports = config

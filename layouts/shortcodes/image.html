@@ -2,17 +2,23 @@
     {{- if .Get "link" -}}
         <a href="{{ .Get "link" }}"{{ with .Get "target" }} target="{{ . }}"{{ end }}{{ with .Get "rel" }} rel="{{ . }}"{{ end }}>
     {{- end }}
-    <img src="{{ .Get "src" }}"
-         class="ui centered fluid image"
+    {{ .Scratch.Set "img" (.Page.Resources.GetMatch (.Get "src")) }}
+    {{- if (or (.Get "width") (.Get "height")) }}
+    {{ .Scratch.Set "img" ((.Scratch.Get "img").Resize (printf "%vx%v" (.Get "width") (.Get "height")))  }}
+    {{- end }}
+    {{ $img := .Scratch.Get "img" }}
+    <img src="{{ $img.RelPermalink }}"
+         class="ui {{if (.Get "img_class")}}{{.Get "img_class"}}{{else}}centered fluid{{end}} image"
          {{- if or (.Get "alt") (.Get "caption") }}
          alt="{{ with .Get "alt" }}{{ . }}{{ else }}{{ .Get "caption" | markdownify| plainify }}{{ end }}"
          {{- end -}}
-         {{- with .Get "width" }} width="{{ . }}"{{ end -}}
-         {{- with .Get "height" }} height="{{ . }}"{{ end -}}
+         loading="lazy"
+         width="{{ $img.Width }}"
+         height="{{ $img.Height }}"
     /> <!-- Closing img tag -->
     {{- if .Get "link" }}</a>{{ end -}}
     {{- if or (or (.Get "title") (.Get "caption")) (.Get "attr") -}}
-        <figcaption>
+        <figcaption class="ui centered">
             {{ with (.Get "title") -}}
                 <h4>{{ . }}</h4>
             {{- end -}}

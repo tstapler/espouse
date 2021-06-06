@@ -14,7 +14,7 @@
         <h2 class="ui centered header"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
       </div>
       {{ if .Params.cover }}
-      <div class="image"><img data-src="{{ .Params.cover | relURL }}" ></div>
+      <div class="image"><img loading="lazy" src="{{ .Params.cover | relURL }}" ></div>
       {{ end }}
       <div class="content">
         {{ .Summary }}
