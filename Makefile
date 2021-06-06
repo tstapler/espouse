@@ -1,6 +1,9 @@
 build:
 	yarn build
 
+build-semantic:
+	gulp build
+
 deps:
 	yarn install
 
