@@ -1,1 +1,9 @@
-{{ if and (eq .Kind "section") .IsPaginated }}
+{{ if eq .Kind "section" }}
+  {{ if .IsPaginated }}
+    <meta name="robots" content="noindex, follow">
+  {{ else }}
+    {{ with .Params.robots }}<meta name="robots" content="{{ . }}">{{ end }}
+  {{ end }}
+{{ else }}
+  {{ with .Params.robots }}<meta name="robots" content="{{ . }}">{{ end }}
+{{ end }}
