@@ -30,6 +30,20 @@
 ## Current Priorities
 // [Existing tasks...]
 
+## Current Issues
+
+### Hugo Template Errors 🚨
+1. **Pagination Field Error**
+   - Fix `.IsPaginated` field check in meta partial
+   - Update template to handle paginated vs non-paginated pages
+   - Verify template context types
+   - Add null checks for page properties
+
+2. **Build Process Improvements**
+   - Add error boundary templates
+   - Implement better template validation
+   - Create build test cases for all page types
+
 ## Documentation
 - Document new theme variables
 - Create theme customization guide
