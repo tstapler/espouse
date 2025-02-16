@@ -1,4 +1,3 @@
-<!-- Title Tags -->
 <title itemprop="name">
   {{- if .IsHome -}}
     {{ .Site.Title }}
@@ -30,14 +29,6 @@
 <meta name="url" content="{{ .RelPermalink }}" />
 <meta name="twitter:url" content="{{ .RelPermalink }}" />
 <meta property="og:url" content="{{ .RelPermalink }}" />
-{{- if .IsPaginated -}}
-  {{- if .Paginator.HasPrev -}}
-    <link rel="prev" href="{{ .Paginator.Prev.URL | absURL }}" />
-  {{- end -}}
-  {{- if .Paginator.HasNext -}}
-    <link rel="next" href="{{ .Paginator.Next.URL | absURL }}" />
-  {{- end -}}
-{{- end -}}
 
 <!-- Image Tags -->
 {{- $ogImage := .Site.Params.ogImage | default "/images/og-default.jpg" | relURL -}}
