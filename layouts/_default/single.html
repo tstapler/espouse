@@ -2,8 +2,8 @@
 <div class="ui inverted vertical masthead center aligned segment">
   <h1>{{ title .Title }}</h1>
 <div class="ui hidden divider"></div>
-    {{ if .Params.image }}
-    <img loading="lazy" class="ui large centered image" src='{{ .Params.image }}'></img>
+    {{ if or .Params.featured_image .Params.image }}
+    <img loading="lazy" class="ui large centered image" src='{{ .Params.featured_image | default .Params.image }}'></img>
 <div class="ui hidden divider"></div>
     {{ end }}
     {{ if .PrevInSection }}

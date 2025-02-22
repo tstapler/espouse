@@ -15,8 +15,8 @@
           {{ end }}
           <h2 class="header"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
         </div>
-        {{ if .Params.image }}
-        <div class="image"><img loading="lazy" src="{{ .Params.image | relURL }}" ></div>
+        {{ if .Params.featured_image }}
+        <div class="image"><img loading="lazy" src="{{ .Params.featured_image | relURL }}" ></div>
         {{ end }}
         <div class="content">
           {{ .Summary }}
