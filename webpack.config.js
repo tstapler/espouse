@@ -39,7 +39,20 @@ const config = {
       },
       {
         test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader', 'resolve-url-loader'],
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              implementation: require('sass'),
+              sassOptions: {
+                outputStyle: 'compressed',
+              }
+            }
+          },
+          'resolve-url-loader'
+        ],
       },
       {
         test: /\.css$/i,
@@ -103,6 +116,18 @@ const config = {
   ],
   optimization: {
     minimize: true,
+    minimizer: [
+      (compiler) => {
+        const TerserPlugin = require('terser-webpack-plugin');
+        new TerserPlugin({
+          terserOptions: {
+            compress: {
+              drop_console: false,
+            },
+          },
+        }).apply(compiler);
+      },
+    ],
   },
 }
 
