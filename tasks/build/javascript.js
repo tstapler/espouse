@@ -10,7 +10,7 @@ let
   fs           = require('fs'),
 
   // gulp dependencies
-  chmod        = require('gulp-chmod'),
+  chmod        = require('../util/chmod-compat'),
   flatten      = require('gulp-flatten'),
   gulpif       = require('gulp-if'),
   plumber      = require('gulp-plumber'),

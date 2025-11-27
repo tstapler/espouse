@@ -14,7 +14,10 @@
       "Bash(npm install:*)",
       "Bash(npx gulp build)",
       "Bash(git reset:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(npx gulp --version)",
+      "Bash(npm view:*)",
+      "Bash(node -e:*)"
     ],
     "deny": [],
     "ask": []
