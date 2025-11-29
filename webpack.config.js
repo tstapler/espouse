@@ -113,7 +113,6 @@ const config = {
     }),
     // MiniCssExtractPlugin handles the bundled .css output file
     new MiniCssExtractPlugin({
-      esModule: true,
       filename: '[name].css',
       chunkFilename: '[name].[id].css',
     }),
