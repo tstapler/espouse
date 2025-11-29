@@ -3,6 +3,7 @@ const path = require('path')
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
 const config = {
   mode: 'production',
@@ -116,6 +117,8 @@ const config = {
       filename: '[name].css',
       chunkFilename: '[name].[id].css',
     }),
+    // Bundle analyzer (enabled with ANALYZE=true environment variable)
+    ...(process.env.ANALYZE ? [new BundleAnalyzerPlugin()] : []),
   ],
   optimization: {
     minimize: true,
@@ -124,6 +127,25 @@ const config = {
       `...`,
       new CssMinimizerPlugin(),
     ],
+    // Tree shaking configuration
+    usedExports: true,
+    sideEffects: false,
+    // Bundle splitting configuration
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          priority: 10,
+        },
+        semantic: {
+          test: /[\\/]node_modules[\\/]semantic-ui/,
+          name: 'semantic',
+          priority: 20,
+        },
+      },
+    },
   },
 }
 

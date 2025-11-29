@@ -1,5 +1,5 @@
-import pJS from "particles.js"
-var particleJSConfig = {
+// Lazy load particles.js only when needed (homepage only)
+const particleJSConfig = {
     "particles": {
           "number": {
                   "value": 80,
@@ -79,15 +79,33 @@ var particleJSConfig = {
     "retina_detect": true,
 };
 
-if(typeof particlesJS !== 'undefined') {
-  // Remove the canvas element if it was created by running preprocessing
- window.addEventListener('load', function() {
-  let exist_canvas = document.getElementsByTagName('canvas')
-  console.log(exist_canvas[0])
-  if(exist_canvas[0]) {
-    exist_canvas[0].remove()
-    console.log("Deleted canvas")
+// Only load particles.js if the particles-js element exists (homepage)
+async function initParticles() {
+  const particlesContainer = document.getElementById('particles-js');
+  if (!particlesContainer) {
+    return; // Not on homepage, skip loading particles.js
   }
-  particlesJS(particleJSConfig);
-})
+
+  // Dynamically import particles.js only when needed
+  const pJS = await import(/* webpackChunkName: "particles" */ "particles.js");
+
+  // Remove any existing canvas elements from preprocessing
+  window.addEventListener('load', function() {
+    const existCanvas = document.getElementsByTagName('canvas');
+    if (existCanvas[0]) {
+      existCanvas[0].remove();
+      console.log("Deleted canvas");
+    }
+
+    if (typeof particlesJS !== 'undefined') {
+      particlesJS('particles-js', particleJSConfig);
+    }
+  });
+}
+
+// Initialize particles when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initParticles);
+} else {
+  initParticles();
 }
