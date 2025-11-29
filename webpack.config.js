@@ -50,6 +50,17 @@ const config = {
           MiniCssExtractPlugin.loader,
           'css-loader',
           {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  ['autoprefixer'],
+                  ['cssnano', { preset: 'default' }],
+                ],
+              },
+            },
+          },
+          {
             loader: 'sass-loader',
             options: {
               implementation: require('sass'),
@@ -63,7 +74,11 @@ const config = {
       },
       {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+        ],
       },
       // Webpack 5 asset modules (replaces file-loader/url-loader)
       {
