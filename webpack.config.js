@@ -4,6 +4,7 @@ const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+const CompressionPlugin = require('compression-webpack-plugin')
 
 const config = {
   mode: 'production',
@@ -134,6 +135,13 @@ const config = {
     }),
     // Bundle analyzer (enabled with ANALYZE=true environment variable)
     ...(process.env.ANALYZE ? [new BundleAnalyzerPlugin()] : []),
+    // Gzip compression for production assets
+    new CompressionPlugin({
+      algorithm: 'gzip',
+      test: /\.(js|css|html|svg)$/,
+      threshold: 8192,
+      minRatio: 0.8,
+    }),
   ],
   optimization: {
     minimize: true,
