@@ -18,9 +18,15 @@
         {{ if .Params.featured_image }}
         <div class="image"><img loading="lazy" src="{{ .Params.featured_image | relURL }}" ></div>
         {{ end }}
-        <div class="content">
-          {{ .Summary }}
-        </div>
+         <div class="content card-summary-content {{ if .Params.ai_generated }}ai-summary{{ end }}">
+           {{ .Params.summary | default .Summary }}
+         </div>
+         {{ if .Params.ai_generated }}
+         <div class="ai-summary-indicator">
+           <i class="robot icon"></i>
+           <small>AI Generated</small>
+         </div>
+         {{ end }}
         {{ if .Truncated }}
         <!-- This <div> includes a read more link, but only if the summary is truncated... -->
         <div class="center aligned content">

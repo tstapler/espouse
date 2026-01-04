@@ -41,6 +41,13 @@
 </div>
 <section id="main" class="ui container">
   <article id="content" class="ui text container">
+    {{ if .Params.ai_generated }}
+    <div class="ai-summary-header">
+      <i class="robot icon"></i>
+      <small>AI-Generated Summary</small>
+      <div class="ui divider"></div>
+    </div>
+    {{ end }}
     {{ .Content }}
   </article>
 </section>
