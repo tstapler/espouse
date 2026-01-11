@@ -137,3 +137,21 @@
     transform: none;
   }
 }
+
+/* AI Summary Styles */
+.ai-summary {
+  background-color: var(--color-bg-tertiary, #f3f4f5);
+  border: 1px solid var(--color-border-primary);
+  padding: 1em;
+  border-radius: 0.3em;
+  margin-bottom: 1em;
+  font-style: italic;
+}
+
+.ai-summary-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  color: var(--color-text-secondary);
+  font-size: 0.85em;
+}
