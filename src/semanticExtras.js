@@ -25,7 +25,7 @@ $('.main.menu').sticky({
 })
 
 $('#menuButton').click(function(){
-  $('.ui.labeled.icon.sidebar')
+  $('.ui.sidebar')
     .sidebar('toggle')
 })
 
