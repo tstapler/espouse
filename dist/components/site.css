@@ -34,6 +34,40 @@ body {
   font-smoothing: antialiased;
 }
 
+/* Skip navigation links for accessibility */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: #007cba;
+  color: #fff;
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 1000;
+  font-weight: bold;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
+/* Enhanced focus styles for accessibility */
+*:focus {
+  outline: 2px solid #007cba;
+  outline-offset: 2px;
+}
+
+/* Dark mode focus styles */
+body[data-theme="dark"] .skip-link {
+  background: #2d5a8e;
+  color: #fff;
+}
+
+body[data-theme="dark"] *:focus {
+  outline-color: #5a9fd4;
+}
+
 
 /*******************************
              Headers

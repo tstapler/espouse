@@ -18,13 +18,18 @@ gtag('config', '{{- .Site.Params.gaTag }}');
 
 {{- partial "meta" . }}
 <body>
+  <!-- Skip navigation links for accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <a href="#sidebar" class="skip-link">Skip to navigation</a>
   {{- partial "site_sidebar" . }}
   <div class="ui pusher">
   {{- partial "site_nav" . }}
   <!-- Code that all your templates share, like a header -->
+  <main id="main-content" role="main" aria-label="Main content">
     {{- block "main" . }}
-    <!-- The part of the page that begins to differ between templates -->
-    {{- end }} 
+    <!-- The part of page that begins to differ between templates -->
+    {{- end }}
+  </main>
   </div>
   {{- block "footer" . }}
   <!-- More shared code, perhaps a footer but that can be overridden if need be in  -->

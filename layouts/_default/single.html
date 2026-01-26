@@ -1,9 +1,9 @@
 {{ define "main" }}
-<div class="ui inverted vertical masthead center aligned segment">
+<header class="ui inverted vertical masthead center aligned segment">
   <h1>{{ title .Title }}</h1>
 <div class="ui hidden divider"></div>
     {{ if or .Params.featured_image .Params.image }}
-    <img loading="lazy" class="ui large centered image" src='{{ .Params.featured_image | default .Params.image }}'></img>
+    <img loading="lazy" class="ui large centered image" src='{{ .Params.featured_image | default .Params.image }}' alt="{{ .Params.featured_image_alt | default .Params.image_alt | default .Title }}">
 <div class="ui hidden divider"></div>
     {{ end }}
     {{ if .PrevInSection }}
