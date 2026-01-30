@@ -7,3 +7,8 @@
 {{ $semanticExtras := . | js.Build (dict "minify" hugo.IsProduction) | resources.Fingerprint "sha512"}}
 <script defer crossorigin="anonymous" src='{{ $semanticExtras.RelPermalink }}' integrity='{{ $semanticExtras.Data.Integrity }}'></script>
 {{end}}
+
+<!-- Service Worker Manager -->
+{{ if not .Site.IsServer }}
+<script src="/js/sw-manager.js" defer></script>
+{{ end }}

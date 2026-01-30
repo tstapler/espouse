@@ -1,0 +1,57 @@
+{{- /* Service Worker Partial for Hugo Theme */ -}}
+{{- if not .Site.IsServer }}
+{{- $swUrl := "/service-worker.js" }}
+<script>
+  // Enhanced Service Worker Registration for Hugo
+  (function() {
+    'use strict';
+    
+    // Check if we should register the service worker
+    const shouldRegister = 'serviceWorker' in navigator && 
+                          (location.protocol === 'https:' || location.hostname === 'localhost');
+    
+    if (!shouldRegister) {
+      console.log('[Hugo SW] Service Worker not supported or not in secure context');
+      return;
+    }
+    
+    // Service Worker URL with cache busting for development
+    const swUrl = '{{ $swUrl }}' + (location.hostname === 'localhost' ? '?v=' + Date.now() : '');
+    
+    // Register the service worker
+    navigator.serviceWorker.register(swUrl)
+      .then(function(registration) {
+        console.log('[Hugo SW] Service Worker registered successfully:', registration.scope);
+        
+        // Check for updates immediately
+        registration.update();
+        
+        // Set up periodic update checking (every 2 hours)
+        setInterval(() => {
+          registration.update();
+        }, 2 * 60 * 60 * 1000);
+        
+        // Handle controller change for immediate updates
+        let refreshing = false;
+        navigator.serviceWorker.addEventListener('controllerchange', function() {
+          if (refreshing) return;
+          refreshing = true;
+          console.log('[Hugo SW] Reloading for new version...');
+          window.location.reload();
+        });
+        
+      })
+      .catch(function(error) {
+        console.error('[Hugo SW] Service Worker registration failed:', error);
+      });
+    
+    // Handle messages from service worker
+    navigator.serviceWorker.addEventListener('message', function(event) {
+      if (event.data && event.data.type === 'CACHE_UPDATED') {
+        console.log('[Hugo SW] Cache updated:', event.data.url);
+      }
+    });
+    
+  })();
+</script>
+{{- end }}

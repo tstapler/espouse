@@ -1,0 +1,38 @@
+{
+  "name": "espouse-pwa-icons",
+  "version": "1.0.0",
+  "description": "PWA icon generator for Espouse Hugo theme",
+  "main": "generate-icons.js",
+  "scripts": {
+    "generate": "node generate-icons.js",
+    "generate:shell": "chmod +x generate-icons.sh && ./generate-icons.sh",
+    "test": "node test-icons.js",
+    "optimize": "optipng -o7 *.png || true"
+  },
+  "keywords": [
+    "pwa",
+    "icons",
+    "hugo",
+    "espouse",
+    "progressive-web-app"
+  ],
+  "author": "Espouse Theme",
+  "license": "MIT",
+  "devDependencies": {
+    "sharp": "^0.33.0"
+  },
+  "optionalDependencies": {
+    "optipng": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/espouse.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/espouse/issues"
+  },
+  "homepage": "https://github.com/yourusername/espouse#readme"
+}

@@ -43,4 +43,6 @@ gtag('config', '{{- .Site.Params.gaTag }}');
     <!-- The part of the page that begins to differ between templates -->
 {{- end }}
 
+{{- partial "service-worker" . }}
+
 </html>

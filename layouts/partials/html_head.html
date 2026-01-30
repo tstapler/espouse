@@ -1,6 +1,43 @@
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5.0" charset="utf-8" />
+  
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#2185d0">
+  
+  <!-- PWA Icons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/icons/favicon-48.png">
+  <link rel="shortcut icon" href="/icons/favicon.ico">
+  <meta name="apple-mobile-web-app-status-bar" content="#2185d0">
+  
+  <!-- PWA Meta Tags -->
+  <meta name="application-name" content="Espouse">
+  <meta name="apple-mobile-web-app-title" content="Espouse">
+  <meta name="msapplication-TileColor" content="#2185d0">
+  <meta name="msapplication-config" content="/browserconfig.xml">
+  
+  <!-- Service Worker Registration (Production Only) -->
+  {{ if not .Site.IsServer }}
+  <script>
+    // Service Worker registration with proper handling for PWA
+    if ('serviceWorker' in navigator && location.protocol === 'https:' || location.hostname === 'localhost') {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(function(registration) {
+            console.log('SW registered: ', registration);
+          })
+          .catch(function(registrationError) {
+            console.log('SW registration failed: ', registrationError);
+          });
+      });
+    }
+  </script>
+  {{ end }}
 
   <!-- Inline theme script to prevent FOUC (Flash of Unstyled Content) -->
   <script>

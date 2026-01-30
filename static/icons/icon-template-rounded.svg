@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Background with rounded corners -->
+  <rect width="512" height="512" fill="#2185d0" rx="120"/>
+  
+  <!-- Letter E with modern geometric design -->
+  <g fill="#ffffff">
+    <!-- Main stem -->
+    <rect x="100" y="100" width="60" height="312" rx="8"/>
+    
+    <!-- Top bar -->
+    <rect x="100" y="100" width="312" height="60" rx="8"/>
+    
+    <!-- Middle bar -->
+    <rect x="100" y="226" width="248" height="60" rx="8"/>
+    
+    <!-- Bottom bar -->
+    <rect x="100" y="352" width="312" height="60" rx="8"/>
+  </g>
+  
+  <!-- Subtle gradient overlay -->
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#grad)" rx="120"/>
+</svg>

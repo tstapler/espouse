@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <!-- Background -->
+  <rect width="192" height="192" fill="#2185d0" rx="0"/>
+  
+  <!-- Letter E with modern geometric design -->
+  <g fill="#ffffff">
+    <!-- Main stem -->
+    <rect x="37" y="37" width="22" height="118" rx="3"/>
+    
+    <!-- Top bar -->
+    <rect x="37" y="37" width="118" height="22" rx="3"/>
+    
+    <!-- Middle bar -->
+    <rect x="37" y="85" width="94" height="22" rx="3"/>
+    
+    <!-- Bottom bar -->
+    <rect x="37" y="133" width="118" height="22" rx="3"/>
+  </g>
+</svg>
