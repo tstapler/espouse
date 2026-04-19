@@ -9,6 +9,6 @@
 {{end}}
 
 <!-- Service Worker Manager -->
-{{ if not .Site.IsServer }}
+{{ if not hugo.IsServer }}
 <script src="/js/sw-manager.js" defer></script>
 {{ end }}

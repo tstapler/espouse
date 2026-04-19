@@ -1,5 +1,5 @@
 {{- /* Service Worker Partial for Hugo Theme */ -}}
-{{- if not .Site.IsServer }}
+{{- if not hugo.IsServer }}
 {{- $swUrl := "/service-worker.js" }}
 <script>
   // Enhanced Service Worker Registration for Hugo

@@ -22,7 +22,7 @@
   <meta name="msapplication-config" content="/browserconfig.xml">
   
   <!-- Service Worker Registration (Production Only) -->
-  {{ if not .Site.IsServer }}
+  {{ if not hugo.IsServer }}
   <script>
     // Service Worker registration with proper handling for PWA
     if ('serviceWorker' in navigator && location.protocol === 'https:' || location.hostname === 'localhost') {
