@@ -92,18 +92,6 @@ const config = {
       {
         test: /\.svg$/,
         type: 'asset/resource',
-        use: [
-          {
-            loader: 'svgo-loader',
-            options: {
-              plugins: [
-                {removeTitle: true},
-                {convertColors: {shorthex: false}},
-                {convertPathData: false}
-              ]
-            }
-          }
-        ],
         generator: {
           filename: '[name][ext]?[hash]'
         }

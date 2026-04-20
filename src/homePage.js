@@ -1,111 +1,81 @@
-// Lazy load particles.js only when needed (homepage only)
-const particleJSConfig = {
-    "particles": {
-          "number": {
-                  "value": 80,
-                  "density": {
-                            "enable": true,
-                            "value_area": 800
-                          }
-                },
-          "color": {
-                  "value": "#ffffff"
-                },
-          "shape": {
-                  "type": "circle",
-                  "stroke": {
-                            "width": 0,
-                            "color": "#000000"
-                          },
-                  "polygon": {
-                            "nb_sides": 5
-                          },
-                },
-          "opacity": {
-                  "value": 0.5,
-                  "random": false,
-                  "anim": {
-                            "enable": false,
-                            "speed": 1,
-                            "opacity_min": 0.1,
-                            "sync": false
-                          }
-                },
-          "size": {
-                  "value": 3,
-                  "random": true,
-                  "anim": {
-                            "enable": false,
-                            "speed": 40,
-                            "size_min": 0.1,
-                            "sync": false
-                          }
-                },
-          "line_linked": {
-                  "enable": true,
-                  "distance": 150,
-                  "color": "#ffffff",
-                  "opacity": 0.4,
-                  "width": 1
-                },
-          "move": {
-                  "enable": true,
-                  "speed": 6,
-                  "direction": "none",
-                  "random": false,
-                  "straight": false,
-                  "out_mode": "out",
-                  "attract": {
-                            "enable": false,
-                            "rotateX": 600,
-                            "rotateY": 1200
-                          }
-                }
-        },
-    "interactivity": {
-          "detect_on": "canvas",
-          "events": {
-                  "onhover": {
-                            "enable": true,
-                            "mode": "repulse"
-                          },
-                  "onclick": {
-                            "enable": true,
-                            "mode": "push"
-                          },
-                  "resize": true
-                },
-        },
-    "retina_detect": true,
-};
+// CSS-based animated background — replaces particles.js (~87KB saved)
+// Generates floating dot particles using canvas, zero dependencies
+function initCanvasBackground() {
+  var container = document.getElementById('particles-js')
+  if (!container) return
 
-// Only load particles.js if the particles-js element exists (homepage)
-async function initParticles() {
-  const particlesContainer = document.getElementById('particles-js');
-  if (!particlesContainer) {
-    return; // Not on homepage, skip loading particles.js
+  var canvas = document.createElement('canvas')
+  canvas.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none'
+  container.insertBefore(canvas, container.firstChild)
+
+  var ctx = canvas.getContext('2d')
+  var dots = []
+  var W, H
+
+  function resize() {
+    W = canvas.width = container.offsetWidth
+    H = canvas.height = container.offsetHeight
   }
 
-  // Dynamically import particles.js only when needed
-  const pJS = await import(/* webpackChunkName: "particles" */ "particles.js");
+  function Dot() {
+    this.x = Math.random() * W
+    this.y = Math.random() * H
+    this.r = Math.random() * 2 + 1
+    this.vx = (Math.random() - 0.5) * 0.6
+    this.vy = (Math.random() - 0.5) * 0.6
+    this.alpha = Math.random() * 0.4 + 0.1
+  }
 
-  // Remove any existing canvas elements from preprocessing
-  window.addEventListener('load', function() {
-    const existCanvas = document.getElementsByTagName('canvas');
-    if (existCanvas[0]) {
-      existCanvas[0].remove();
-      console.log("Deleted canvas");
-    }
+  Dot.prototype.update = function() {
+    this.x += this.vx
+    this.y += this.vy
+    if (this.x < 0 || this.x > W) this.vx *= -1
+    if (this.y < 0 || this.y > H) this.vy *= -1
+  }
 
-    if (typeof particlesJS !== 'undefined') {
-      particlesJS('particles-js', particleJSConfig);
+  function init() {
+    resize()
+    dots = Array.from({ length: 60 }, function() { return new Dot() })
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H)
+    // Draw connecting lines between nearby dots
+    for (var i = 0; i < dots.length; i++) {
+      for (var j = i + 1; j < dots.length; j++) {
+        var dx = dots[i].x - dots[j].x
+        var dy = dots[i].y - dots[j].y
+        var dist = Math.sqrt(dx * dx + dy * dy)
+        if (dist < 120) {
+          ctx.beginPath()
+          ctx.strokeStyle = 'rgba(255,255,255,' + (0.15 * (1 - dist / 120)) + ')'
+          ctx.lineWidth = 0.5
+          ctx.moveTo(dots[i].x, dots[i].y)
+          ctx.lineTo(dots[j].x, dots[j].y)
+          ctx.stroke()
+        }
+      }
     }
-  });
+    // Draw dots
+    dots.forEach(function(d) {
+      d.update()
+      ctx.beginPath()
+      ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2)
+      ctx.fillStyle = 'rgba(255,255,255,' + d.alpha + ')'
+      ctx.fill()
+    })
+    requestAnimationFrame(draw)
+  }
+
+  window.addEventListener('resize', resize)
+  init()
+
+  // Defer first frame slightly so it doesn't block paint
+  requestAnimationFrame(draw)
 }
 
-// Initialize particles when DOM is ready
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initParticles);
+  document.addEventListener('DOMContentLoaded', initCanvasBackground)
 } else {
-  initParticles();
+  initCanvasBackground()
 }
