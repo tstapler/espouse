@@ -34,7 +34,7 @@ $('#menuButton').on('click keydown', function(e){
 
 // --- Copy-to-clipboard for code blocks ---
 function addCopyButtons() {
-  document.querySelectorAll('article pre').forEach(function(pre) {
+  document.querySelectorAll('article pre:not(.mermaid)').forEach(function(pre) {
     var btn = document.createElement('button')
     btn.className = 'copy-btn'
     btn.textContent = 'Copy'
