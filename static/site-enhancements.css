@@ -240,3 +240,21 @@ h3:hover .heading-anchor { opacity: 1; }
 
 /* === Site email === */
 .site-email { font-size: 1rem; opacity: .85; }
+
+/* === Dark mode token overrides === */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary:      #5ba8e5;
+    --color-primary-dark: #4a97d4;
+    --color-link:         #79b8f3;
+    --color-success:      #3dd68c;
+    --toc-bg:             #1e2530;
+    --toc-border:         #2e3a48;
+    --toc-label:          #a0aab4;
+    --tag-bg:             #1a2535;
+    --anchor-color:       #6b7280;
+    --feed-border:        #2e3a48;
+    --meta-color:         #9ca3af;
+    --summary-color:      #9ca3af;
+  }
+}
