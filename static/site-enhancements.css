@@ -345,3 +345,61 @@ h3:hover .heading-anchor { opacity: 1; }
   }
   .citation-error { color: #fc8181; }
 }
+
+/* === Tech marquee (homepage) === */
+.tech-marquee-section {
+  padding: 1rem 0 2rem;
+}
+.tech-marquee-viewport {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+}
+.tech-marquee-track {
+  display: flex;
+  gap: 0.5rem;
+  width: max-content;
+  animation: tech-marquee-scroll 45s linear infinite;
+}
+.tech-marquee-track:hover {
+  animation-play-state: paused;
+}
+@keyframes tech-marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.tech-marquee-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  cursor: default;
+  transition: background 0.15s;
+  min-width: 90px;
+}
+.tech-marquee-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.tech-marquee-logo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
+  transition: opacity 0.15s;
+}
+.tech-marquee-item:hover .tech-marquee-logo {
+  opacity: 1;
+}
+.tech-marquee-label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+.tech-marquee-item:hover .tech-marquee-label {
+  color: rgba(255, 255, 255, 1);
+}
